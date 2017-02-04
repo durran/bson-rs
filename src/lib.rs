@@ -52,6 +52,7 @@ extern crate serde;
 extern crate time;
 extern crate linked_hash_map;
 extern crate hostname;
+extern crate decimal;
 
 pub use self::bson::{Bson, Document, Array};
 pub use self::encoder::{encode_document, to_bson, Encoder, EncoderResult, EncoderError};

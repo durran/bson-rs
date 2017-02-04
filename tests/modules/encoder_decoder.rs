@@ -268,3 +268,20 @@ fn test_encode_decode_symbol() {
     let decoded = decode_document(&mut Cursor::new(buf)).unwrap();
     assert_eq!(decoded, doc);
 }
+
+#[test]
+fn test_encode_decode_decimal128() {
+    let val = Bson::Decimal128(d128!(0));
+    let dst = vec![26, 0, 0, 0, 19, 107, 101, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+                   34, 0];
+
+    let doc = doc! { "key" => val };
+
+    let mut buf = Vec::new();
+    encode_document(&mut buf, &doc).unwrap();
+
+    assert_eq!(buf, dst);
+
+    let decoded = decode_document(&mut Cursor::new(buf)).unwrap();
+    assert_eq!(decoded, doc);
+}
